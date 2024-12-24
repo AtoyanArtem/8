@@ -1,50 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обратная связь</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Форма обратной связи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup.active {
+            display: flex;
+        }
+        .form-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .form-container h2 {
+            margin: 0 0 15px;
+        }
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container textarea {
+            resize: none;
+        }
+        .form-container .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        .form-container .checkbox-container input {
+            margin-right: 10px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background: #2bff00;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background: #b30083;
+        }
+
+    </style>
 </head>
 <body>
-    <button class="btn btn-outline-dark" id="openFormBtn">Открыть форму обратной связи</button>
-
-    <div id="popup" class="popup">
-        <div class="popup-content">
+    <button id="openFormButton">Открыть форму</button>
+    <div class="popup" id="popup">
+        <div class="form-container">
+            <h2>Форма обратной связи</h2>
             <form id="feedbackForm">
-                <a class="cl-btn"><button id="closeFormBtn" class="close-btn">&times;</button></a>
-                <h2>Форма обратной связи</h2>
-                <label class="form-label">
-                    ФИО:
-                    <input class="form-control" type="text" name="name" id="name" required>
-                </label>
-                <label class="form-label">
-                    Email:
-                    <input class="form-control" type="email" name="email" id="email" required>
-                </label>
-                <label class="form-label">
-                    Телефон:
-                    <input class="form-control" type="tel" name="phone" id="phone" required>
-                </label>
-                <label class="form-label">
-                    Организация:
-                    <input class="form-control" type="text" name="organization" id="organization">
-                </label>
-                <label class="form-label">
-                    Сообщение:
-                    <textarea class="form-control" name="message" id="message" required></textarea>
-                </label>
-                <label for="floatingTextarea">
-                    <input class="form-check-input" type="checkbox" name="consent" id="consent" required>
-                    Я согласен с политикой обработки персональных данных
-                </label>
-                <button class="btn btn-outline-secondary" type="submit" id="submitBtn">Отправить</button>
+                <input type="text" id="name" name="name" placeholder="ФИО" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="tel" id="phone" name="phone" placeholder="Телефон" required>
+                <input type="text" id="organization" name="organization" placeholder="Организация">
+                <textarea id="message" name="message" rows="4" placeholder="Сообщение"></textarea>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="policy" name="policy" required>
+                    <label for="policy">Согласие с политикой обработки данных</label>
+                </div>
+                <button type="submit">Отправить</button>
             </form>
-            <div id="responseMessage"></div>
+            <div class="message" id="message"></div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="main.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
