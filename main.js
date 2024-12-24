@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const responseMessage = document.getElementById("responseMessage");
 
 
-    // LocalStorage data restoration
+    // Восстановление данных из локального хранилища
     const restoreFormData = () => {
         const savedData = JSON.parse(localStorage.getItem("formData")) || {};
         Object.keys(savedData).forEach(key => {
@@ -38,11 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
         history.replaceState({ popupOpen: false }, "", "");
     };
 
-    // Open/Close popup
+    // Всплывающее окно "Открыть/закрыть"
     openFormBtn.addEventListener("click", showPopup);
     closeFormBtn.addEventListener("click", closePopup);
 
-    // History handling
+    // Обработка истории
     window.addEventListener("popstate", (event) => {
         if (event.state?.popupOpen) {
             showPopup();
@@ -51,12 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Submit form
+    // Отправить форму
     feedbackForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         saveFormData();
 
-        // **ВАЖНО**: Получаем значения элементов формы *здесь*
+        // Получаем значения элементов формы *здесь*
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const phone = document.getElementById("phone").value;
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const message = document.getElementById("message").value;
 
 
-        // Проверка на пустые поля (можно добавить больше валидаций)
+        // Проверка на пустые поля
         if (!name || !email || !phone || !message || !organization) {
             responseMessage.textContent = "Заполните все поля!";
             responseMessage.style.color = "red";
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
           const response = await fetch(
-              `https://api.telegram.org/bot6225547753:AAFVEl4lSZ4G0cN-zmZAL1O3LTu4dBDf7ug/sendMessage`,
+              `https://t.me/Artem2066Bot`,
                 {
                   method: "POST",
                   headers: {
@@ -101,6 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Restore form data (после объявления обработчика submit)
+    // Восстановление данных формы (после объявления обработчика submit)
      restoreFormData();
 });
